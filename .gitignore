@@ -1,0 +1,6 @@
+# ignore everything from venv
+bin/
+include/
+lib/
+lib64
+share/
