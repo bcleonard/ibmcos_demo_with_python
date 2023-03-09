@@ -4,7 +4,7 @@ This is demo repository which will provide various demo's of specific features a
 **Notice:  The scripts and information in this toolkit are provided as-is, without any support.**
 
 # Included:
-* [Basic Demo](s3_demo_basicy.py) - demo that creates creates vault, uploads file(s), deletes files (s), deletes bucket
+* [Basic Demo](s3_demo_basic.py) - demo that creates creates vault, uploads file(s), deletes files (s), deletes bucket
 
 ## Requirements:
 These demos were developed with the following:
@@ -16,21 +16,21 @@ These demos were developed with the following:
 * [Python Libraries](requirements.txt)
 * [git](https://git-scm.com/)
 
-##How to install:
+## How to install:
 All the following steps should be run on your debian instance.  You'll need to make sure python3, pip & venv are already installd.  You'll need internet access to download the libraries.
 
-###Download the demo repo:
+### Download the demo repo:
 ```
 git clone https://github.com/bcleonard/ibmcos_demo_with_python.git
 ```
 
-###Set up the virtual environment:
+### Set up the virtual environment:
 ```
 cd ibmcos_demo_with_python
 python3 -m venv virtualenv
 ```
 
-###Install the required python libraries:
+### Install the required python libraries:
 ```
 cd ibmcos_demo_with_python
 pip3 install -r requirements.txt
