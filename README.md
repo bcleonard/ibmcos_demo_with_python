@@ -3,8 +3,8 @@ This is demo repository which will provide various demo's of specific features a
 
 **Notice:  The scripts and information in this toolkit are provided as-is, without any support.**
 
-# Included:
-* [Basic Demo](s3_demo_basic.py) - demo that creates creates vault, uploads file(s), deletes files (s), deletes bucket
+## Included:
+* [Basic Demo](s3_demo_basic.py) - demo that creates creates vault, uploads file(s), deletes files(s), deletes bucket
 
 ## Requirements:
 These demos were developed with the following:
@@ -17,7 +17,7 @@ These demos were developed with the following:
 * [git](https://git-scm.com/)
 
 ## How to install:
-All the following steps should be run on your debian instance.  You'll need to make sure python3, pip & venv are already installd.  You'll need internet access to download the libraries.
+All the following steps should be run on your debian instance.  You'll need to make sure python3, pip & venv are already installed.  You'll need internet access from your debian instance to download the libraries.
 
 ### Download the demo repo:
 ```
@@ -38,7 +38,7 @@ pip3 install -r requirements.txt
 
 ## How to configure:
 
-# How to Use:
+## How to Use:
 
 Activate the virtual environment:
 ```
@@ -56,12 +56,14 @@ When you're done, deactivate your virtual environment:
 deactivate
 ```
 
+### IBM Documentation
 IBM published resources for IBM COS:
 * [IBM Cloud Object Storage System documentation](https://www.ibm.com/support/knowledgecenter/en/STXNRM) (IBM Cloud Object Storage System documentation)
 * [IBM Cloud Object Storage System Product Guide](https://www.redbooks.ibm.com/abstracts/sg248439.html) (IBM Redbook)
 * [IBM Cloud Object Storage Concepts and Architecture](https://www.redbooks.ibm.com/abstracts/redp5537.html) (IBM Redpaper)
 
 Other resources for administrating IBM COS:
+* [IBM COS Toolkit](https://github.com/bcleonard/ibm_cos_toolkit) (Toolkit for IBM Cloud Object Storage Administrators)
 * [AWS Command Line Interface](https://aws.amazon.com/cli/) (unified tool to manage AWS services)
 * [Object Generator](https://github.com/IBM/og) (http tool for load testing object storage APIs)
 * [testssl.sh](https://testssl.sh/) (testing TLS/SSL encryption)
