@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import boto3
 from boto3 import client
 import configparser
@@ -5,14 +7,21 @@ from os import getenv
 from botocore.exceptions import ClientError
 from typing import BinaryIO
 import time
+import argparse
 
 #
 # source inspiration of script
 # https://dev.to/nelsoncode/aws-s3-with-python-3bnn
 #
 
-BUCKET_NAME = 'bclcliapitestbucket'
+#
+# global variables
+#
+CONFIG_FILE="demo_config.txt"
 
+#
+# defined functions
+#
 def list_buckets():
     try:
         response = clientS3.list_buckets()
@@ -78,29 +87,55 @@ def delete_bucket(bucket: str):
 #                  endpoint_url=ACCESSER_URL
 #                  )
 
-session = boto3.Session(profile_name="ibmcos")
-credentials = session.get_credentials()
-print("AWS_ACCESS_KEY_ID = {}".format(credentials.access_key))
-print("AWS_SECRET_ACCESS_KEY = {}".format(credentials.secret_key))
-print("AWS_SESSION_TOKEN = {}".format(credentials.token))
+#session = boto3.Session(profile_name="ibmcos")
+#credentials = session.get_credentials()
+#print("AWS_ACCESS_KEY_ID = {}".format(credentials.access_key))
+#print("AWS_SECRET_ACCESS_KEY = {}".format(credentials.secret_key))
+#print("AWS_SESSION_TOKEN = {}".format(credentials.token))
 
+#
+# parse command line
+#
+parser = argparse.ArgumentParser(description="conduct a very basic IBM COS s3 demo")
+parser.add_argument("-c", "--config", help = "Alternate configuration file", required = False, default = "")
+argument = parser.parse_args()
+
+if (argument.config):
+    CONFIG_FILE = format(argument.config)
+    print("Using alternate configuration file: ", CONFIG_FILE)
+
+#
+# parse configuration file
+#
 config = configparser.ConfigParser()
-config.read('../.aws/config')
-endpoint_url=config['profile ibmcos']['endpoint_url']
-print(endpoint_url)
-endpoint_url.strip("'")
-print(endpoint_url)
+config.read(CONFIG_FILE)
+access_key=config['s3_demo_basic']['access_key_id']
+secret_access_key=config['s3_demo_basic']['secret_access_key']
+accesser=config['s3_demo_basic']['accesser_url']
+bucket=config['s3_demo_basic']['bucket']
+
+print("\ns3_demo_basic Configuration:")
+print("         Access Key: ", access_key)
+print("  Secret Access Key: ", secret_access_key)
+print("       Accesser URL: ", accesser)
+print("             Bucket: ", bucket)
+print("")
+
+exit()
+#print(endpoint_url)
+#endpoint_url.strip("'")
+#print(endpoint_url)
 
 clientS3 = client("s3",
-    aws_access_key_id=credentials.access_key,
-    aws_secret_access_key=credentials.secret_key,
-    endpoint_url=endpoint_url)
+    aws_access_key_id=access_key,
+    aws_secret_access_key=secret_access_key,
+    endpoint_url=accesser)
 
 # retrieve the list of existing buckets
 list_buckets()
 
 # create bucket
-create_bucket(BUCKET_NAME)
+create_bucket(bucket)
 
 # wait for bucket to be created
 print(f'sleep 60 seconds, waiting for bucket to be created')
@@ -110,14 +145,14 @@ time.sleep(60)
 list_buckets()
 
 # list contents of bucket
-list_bucket_contents(BUCKET_NAME)
+list_bucket_contents(bucket)
 
 # upload files
 with open('/usr/bin/dockerd', 'rb') as data:
-    clientS3.upload_fileobj(data, BUCKET_NAME, 'dockerd')
+    clientS3.upload_fileobj(data, bucket, 'dockerd')
 
 # list contents of bucket
-list_bucket_contents(BUCKET_NAME)
+list_bucket_contents(bucket)
 
 # Retrieve the list of existing buckets
 list_buckets()
@@ -126,7 +161,7 @@ print(f'sleep 60 seconds, waiting for you to check out the bucket')
 time.sleep(60)
 
 # delete bucket
-delete_bucket(BUCKET_NAME)
+delete_bucket(bucket)
 
 print(f'sleep 60 seconds, waiting for bucket to be deleted')
 time.sleep(60)

@@ -38,6 +38,8 @@ pip3 install -r requirements.txt
 
 ## How to configure:
 
+To configure the demo, you'll need to edit the [demo_config.txt](demo_config.txt).  Each demo will have its own section.  At a minimum, you'll need to replace/update the Access Key, Secret Access Key & Accesser URL.
+
 ## How to Use:
 
 Activate the virtual environment:

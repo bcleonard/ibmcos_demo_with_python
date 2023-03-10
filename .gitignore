@@ -1,2 +1,4 @@
 # ignore everything from venv
 virtualenv
+# ignore my local config
+bcl_test_config.txt
