@@ -102,7 +102,7 @@ argument = parser.parse_args()
 
 if (argument.config):
     CONFIG_FILE = format(argument.config)
-    print("Using alternate configuration file: ", CONFIG_FILE)
+    print("\nUsing alternate configuration file: ", CONFIG_FILE)
 
 #
 # parse configuration file
@@ -121,11 +121,11 @@ print("       Accesser URL: ", accesser)
 print("             Bucket: ", bucket)
 print("")
 
-exit()
-#print(endpoint_url)
-#endpoint_url.strip("'")
-#print(endpoint_url)
+#
+# run demo
+#
 
+# create connection
 clientS3 = client("s3",
     aws_access_key_id=access_key,
     aws_secret_access_key=secret_access_key,
