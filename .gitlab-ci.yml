@@ -7,13 +7,13 @@ default:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
-build-job1:
+lint-check:
   stage: build
   script:
   - echo "running lint check:"
   - flake8 --statistics
 
-build-job2:
+security-check:
   stage: build
   script:
   - echo "running security checks:"
