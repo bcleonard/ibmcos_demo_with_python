@@ -33,6 +33,12 @@ build-job1:
     - echo "running lint check:"
     - flake8 --statistics
 
+build-job2:
+  stage: build
+  script:
+    - echo "running security checks:"
+    - bandit -r .
+
 test-job1:
   stage: test
   script:
