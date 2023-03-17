@@ -15,7 +15,6 @@ default:
   - chmod 700 ~/.ssh
 include:
 - template: Security/SAST.gitlab-ci.yml
-- template: Jobs/SAS.gitlab-ci.yml
 - template: Security/Secret-Detection.gitlab-ci.yml
 build-job1:
   stage: build
