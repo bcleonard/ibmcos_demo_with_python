@@ -68,10 +68,10 @@ deploy_production-job1:
     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
   environment: production
 
- artifacts:
-   name: sast
-   paths:
-     - gl-sast-report.json
-   reports:
-     sast: gl-sast-report.json
-   when: always
+artifacts:
+  name: sast
+  paths:
+    - gl-sast-report.json
+  reports:
+    sast: gl-sast-report.json
+  when: always
