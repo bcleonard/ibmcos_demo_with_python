@@ -22,9 +22,9 @@ default:
     - chmod 700 ~/.ssh
 
     # Use ssh-keyscan to scan the keys of your private server.
-    - if [ "$CI_ENVIRONMENT_NAME" == "production" ]; then   REMOTEHOST=$PROD_HOST; else   REMOTEHOST=$NON_PROD_HOST; fi
-    - ssh-keyscan $REMOTEHOST >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
+    #- if [ "$CI_ENVIRONMENT_NAME" == "production" ]; then   REMOTEHOST=$PROD_HOST; else   REMOTEHOST=$NON_PROD_HOST; fi
+    #- ssh-keyscan $REMOTEHOST >> ~/.ssh/known_hosts
+    #- chmod 644 ~/.ssh/known_hosts
 
 
 build-job1:
