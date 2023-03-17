@@ -16,6 +16,7 @@ import argparse
 #
 CONFIG_FILE = "demo_config.txt"
 
+
 #
 # defined functions
 #
@@ -39,17 +40,16 @@ def create_bucket(bucket: str):
 
 
 def list_bucket_contents(bucket: str):
-     # print the contects of the bucket
+    # print the contects of the bucket
     try:
         objects = clientS3.list_objects_v2(Bucket=bucket)
         fileCount = objects['KeyCount']
         if fileCount == 0:
-            print(f'bucket', bucket, 'is empty.')
+            print('bucket', bucket, 'is empty.')
         else:
-            key = []
-            print(f'bucket', bucket, 'has ', fileCount, ' objects.')
+            print('bucket', bucket, 'has ', fileCount, ' objects.')
             for obj in objects['Contents']:
-                print(f' object name: ', obj['Key'])
+                print(' object name: ', obj['Key'])
         return "success"
     except ClientError as e:
         return e.response["Error"]
@@ -68,10 +68,9 @@ def delete_bucket(bucket: str):
         objects = clientS3.list_objects_v2(Bucket=bucket)
         fileCount = objects['KeyCount']
         if fileCount == 0:
-            print(f'bucket', bucket, 'is empty.')
+            print('bucket', bucket, 'is empty.')
         else:
-            key = []
-            print(f'bucket', bucket, 'has ', fileCount, ' objects.')
+            print('bucket', bucket, 'has ', fileCount, ' objects.')
             for obj in objects['Contents']:
                 print(' deleting object: ', obj['Key'])
                 delete_file(bucket, obj['Key'])
