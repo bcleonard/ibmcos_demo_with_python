@@ -6,7 +6,7 @@ stages:
   - deploy_production
 
 include:
-  - template: Auto-DevOpos.gitlab-ci.yml
+  - template: Auto-DevOps.gitlab-ci.yml
 
 default:
   image: bcleonard/generic-cicd-dockerdev-image:latest
