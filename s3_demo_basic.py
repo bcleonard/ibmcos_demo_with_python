@@ -24,7 +24,7 @@ def list_buckets():
         response = clientS3.list_buckets()
         print('Existing buckets:')
         for bucket in response['Buckets']:
-          print(f'  {bucket["Name"]}')
+            print(f'  {bucket["Name"]}')
         return "success"
     except ClientError as e:
         return e.response["Error"]
@@ -44,12 +44,12 @@ def list_bucket_contents(bucket: str):
         objects = clientS3.list_objects_v2(Bucket=bucket)
         fileCount = objects['KeyCount']
         if fileCount == 0:
-           print(f'bucket', bucket, 'is empty.')
+            print(f'bucket', bucket, 'is empty.')
         else:
-           key = []
-           print(f'bucket', bucket, 'has ', fileCount, ' objects.')
-           for obj in objects['Contents']:
-            print(f' object name: ', obj['Key'])
+            key = []
+            print(f'bucket', bucket, 'has ', fileCount, ' objects.')
+            for obj in objects['Contents']:
+                print(f' object name: ', obj['Key'])
         return "success"
     except ClientError as e:
         return e.response["Error"]
@@ -68,13 +68,13 @@ def delete_bucket(bucket: str):
         objects = clientS3.list_objects_v2(Bucket=bucket)
         fileCount = objects['KeyCount']
         if fileCount == 0:
-           print(f'bucket', bucket, 'is empty.')
+            print(f'bucket', bucket, 'is empty.')
         else:
-           key = []
-           print(f'bucket', bucket, 'has ', fileCount, ' objects.')
-           for obj in objects['Contents']:
-            print(f' deleting object: ', obj['Key'])
-            delete_file(bucket, obj['Key'])
+            key = []
+            print(f'bucket', bucket, 'has ', fileCount, ' objects.')
+            for obj in objects['Contents']:
+                print(' deleting object: ', obj['Key'])
+                delete_file(bucket, obj['Key'])
 
         response = clientS3.delete_bucket(Bucket=bucket)
         return response
@@ -85,8 +85,8 @@ def delete_bucket(bucket: str):
 #
 # parse command line
 #
-parser = argparse.ArgumentParser(description=
-                                 "conduct a very basic IBM COS s3 demo")
+parser = argparse.ArgumentParser(description="conduct a very basic IBM COS "
+                                 "s3 demo")
 parser.add_argument("-c", "--config",
                     help="Alternate configuration file",
                     required=False,
