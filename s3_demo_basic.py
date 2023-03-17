@@ -80,19 +80,6 @@ def delete_bucket(bucket: str):
     except ClientError as e:
         return e.response["Error"]
 
-# create the connection
-#clientS3 = client("s3",
-#                  aws_access_key_id=ACCESS_KEY,
-#                  aws_secret_access_key=SECRET_ACCESS_KEY,
-#                  endpoint_url=ACCESSER_URL
-#                  )
-
-#session = boto3.Session(profile_name="ibmcos")
-#credentials = session.get_credentials()
-#print("AWS_ACCESS_KEY_ID = {}".format(credentials.access_key))
-#print("AWS_SECRET_ACCESS_KEY = {}".format(credentials.secret_key))
-#print("AWS_SESSION_TOKEN = {}".format(credentials.token))
-
 #
 # parse command line
 #
