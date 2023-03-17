@@ -114,9 +114,9 @@ print("")
 
 # create connection
 clientS3 = client("s3",
-    aws_access_key_id=access_key,
-    aws_secret_access_key=secret_access_key,
-    endpoint_url=accesser)
+                  aws_access_key_id=access_key,
+                  aws_secret_access_key=secret_access_key,
+                  endpoint_url=accesser)
 
 # retrieve the list of existing buckets
 list_buckets()
@@ -125,7 +125,7 @@ list_buckets()
 create_bucket(bucket)
 
 # wait for bucket to be created
-print(f'sleep 60 seconds, waiting for bucket to be created')
+print('sleep 60 seconds, waiting for bucket to be created')
 time.sleep(60)
 
 # Retrieve the list of existing buckets
@@ -144,13 +144,13 @@ list_bucket_contents(bucket)
 # Retrieve the list of existing buckets
 list_buckets()
 
-print(f'sleep 60 seconds, waiting for you to check out the bucket')
+print('sleep 60 seconds, waiting for you to check out the bucket')
 time.sleep(60)
 
 # delete bucket
 delete_bucket(bucket)
 
-print(f'sleep 60 seconds, waiting for bucket to be deleted')
+print('sleep 60 seconds, waiting for bucket to be deleted')
 time.sleep(60)
 
 # Retrieve the list of existing buckets
