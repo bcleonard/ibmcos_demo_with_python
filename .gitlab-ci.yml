@@ -1,12 +1,11 @@
+include:
+  - template: Auto-DevOps.gitlab-ci.yml
 
 stages:
   - build
   - test
   - deploy_nonproduction
   - deploy_production
-
-include:
-  - template: Auto-DevOps.gitlab-ci.yml
 
 default:
   image: bcleonard/generic-cicd-dockerdev-image:latest
