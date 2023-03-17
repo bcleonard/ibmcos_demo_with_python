@@ -29,12 +29,14 @@ def list_buckets():
     except ClientError as e:
         return e.response["Error"]
 
+
 def create_bucket(bucket: str):
     try:
         response = clientS3.create_bucket(Bucket=bucket)
         return response
     except ClientError as e:
         return e.response["Error"]
+
 
 def list_bucket_contents(bucket: str):
      # print the contects of the bucket
@@ -52,12 +54,14 @@ def list_bucket_contents(bucket: str):
     except ClientError as e:
         return e.response["Error"]
 
+
 def delete_file(bucket: str, filename: str):
     try:
         response = clientS3.delete_object(Bucket=bucket, Key=filename)
         return response
     except ClientError as e:
         return e.response["Error"]
+
 
 def delete_bucket(bucket: str):
     try:
@@ -77,11 +81,15 @@ def delete_bucket(bucket: str):
     except ClientError as e:
         return e.response["Error"]
 
+
 #
 # parse command line
 #
 parser = argparse.ArgumentParser(description="conduct a very basic IBM COS s3 demo")
-parser.add_argument("-c", "--config", help = "Alternate configuration file", required = False, default = "")
+parser.add_argument("-c", "--config", 
+                    help="Alternate configuration file", 
+                    required=False, 
+                    default="")
 argument = parser.parse_args()
 
 if (argument.config):
