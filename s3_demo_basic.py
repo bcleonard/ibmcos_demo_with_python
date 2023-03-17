@@ -1,11 +1,8 @@
 #!/usr/bin/python3
 
-import boto3
 from boto3 import client
 import configparser
-from os import getenv
 from botocore.exceptions import ClientError
-from typing import BinaryIO
 import time
 import argparse
 
@@ -17,7 +14,7 @@ import argparse
 #
 # global variables
 #
-CONFIG_FILE="demo_config.txt"
+CONFIG_FILE = "demo_config.txt"
 
 #
 # defined functions
@@ -96,10 +93,10 @@ if (argument.config):
 #
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
-access_key=config['s3_demo_basic']['access_key_id']
-secret_access_key=config['s3_demo_basic']['secret_access_key']
-accesser=config['s3_demo_basic']['accesser_url']
-bucket=config['s3_demo_basic']['bucket']
+access_key = config['s3_demo_basic']['access_key_id']
+secret_access_key = config['s3_demo_basic']['secret_access_key']
+accesser = config['s3_demo_basic']['accesser_url']
+bucket = config['s3_demo_basic']['bucket']
 
 print("\ns3_demo_basic Configuration:")
 print("         Access Key: ", access_key)
