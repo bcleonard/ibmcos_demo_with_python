@@ -1,62 +1,50 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 default:
   image: bcleonard/generic-cicd-dockerdev-image:latest
   before_script:
-    - echo "Running before_script"
-    # run ssh-agent (inside the build environment)
-    - eval $(ssh-agent -s)
-
-    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    # We're using tr to fix line endings which makes ed25519 keys work
-    # without extra base64 encoding.
-    # https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-
-    # Create the SSH directory and give it the right permissions
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-
-    # Use ssh-keyscan to scan the keys of your private server.
-    #- if [ "$CI_ENVIRONMENT_NAME" == "production" ]; then   REMOTEHOST=$PROD_HOST; else   REMOTEHOST=$NON_PROD_HOST; fi
-    #- ssh-keyscan $REMOTEHOST >> ~/.ssh/known_hosts
-    #- chmod 644 ~/.ssh/known_hosts
-
+  - echo "Running before_script"
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
 include:
-  - template: Security/SAST.gitlab-ci.yml
-  - template: Jobs/SAS.gitlab-ci.yml
-
+- template: Security/SAST.gitlab-ci.yml
+- template: Jobs/SAS.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml
 build-job1:
   stage: build
   script:
-    - echo "running lint check:"
-    - flake8 --statistics
-
+  - echo "running lint check:"
+  - flake8 --statistics
 build-job2:
   stage: build
   script:
-    - echo "running security checks:"
-    - bandit -r .
-
+  - echo "running security checks:"
+  - bandit -r .
 test-job1:
   stage: test
   script:
-    - echo "This job tests something"
-
+  - echo "This job tests something"
 test-job2:
   stage: test
   script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
-
+  - echo "This job tests something, but takes more time than test-job1."
+  - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
+  - echo "which simulates a test that runs 20 seconds longer than test-job1"
+  - sleep 20
 deploy_nonproduction-job1:
   stage: deploy_nonproduction
   script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+  - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
   environment: nonproduction
-
 deploy_production-job1:
   stage: deploy_production
   script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+  - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
   environment: production
