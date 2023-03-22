@@ -16,18 +16,21 @@ syntax-check:
   stage: build
   script:
   - echo "running syntax check:"
+  - echo $PWD
   - flake8 --statistics
 
 security-link--check:
   stage: build
   script:
   - echo "running security lint tech::"
+  - echo $PWD
   - bandit -r .
 
 test-job1:
   stage: test
   script:
   - echo "This job tests something"
+  - echo $PWD
 
 test-job2:
   stage: test
@@ -35,11 +38,13 @@ test-job2:
   - echo "This job tests something, but takes more time than test-job1."
   - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
   - echo "which simulates a test that runs 20 seconds longer than test-job1"
+  - echo $PWD
   - sleep 20
 
 security-job1:
   stage: security
   script:
   - echo "running python pip-audit:"
+  - echo $PWD
   - pip-audit -r requirements.txt
  
