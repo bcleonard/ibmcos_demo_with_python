@@ -1,3 +1,8 @@
+stages:
+  - build
+  - test
+  - security
+
 default:
   image: bcleonard/generic-cicd-dockerdev-image:latest
   before_script:
@@ -7,16 +12,16 @@ default:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
-lint-check:
+syntax-check:
   stage: build
   script:
-  - echo "running lint check:"
+  - echo "running syntax check:"
   - flake8 --statistics
 
-security-check:
+security-link--check:
   stage: build
   script:
-  - echo "running security checks:"
+  - echo "running security lint tech::"
   - bandit -r .
 
 test-job1:
@@ -31,3 +36,10 @@ test-job2:
   - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
   - echo "which simulates a test that runs 20 seconds longer than test-job1"
   - sleep 20
+
+security-job1:
+  - stage: security
+  script:
+  - echo "running python pip-audit:"
+  - pip-audit -r requirements.txt
+ 
