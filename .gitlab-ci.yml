@@ -38,7 +38,7 @@ test-job2:
   - sleep 20
 
 security-job1:
-  - stage: security
+  stage: security
   script:
   - echo "running python pip-audit:"
   - pip-audit -r requirements.txt
