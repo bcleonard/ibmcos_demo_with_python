@@ -19,7 +19,7 @@ syntax-check:
   - echo $PWD
   - flake8 --statistics
 
-security-link--check:
+security-link-check:
   stage: build
   script:
   - echo "running security lint tech::"
@@ -46,5 +46,7 @@ security-job1:
   script:
   - echo "running python pip-audit:"
   - echo $PWD
+  - python3 -m venv ~/virtualenv/pip-audit
+  - ~/virtualenv/pip-audit/activate
   - pip-audit -r requirements.txt
- 
+  - deactivate 
