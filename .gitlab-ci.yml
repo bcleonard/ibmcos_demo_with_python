@@ -47,6 +47,6 @@ security-job1:
   - echo "running python pip-audit:"
   - echo $PWD
   - python3 -m venv ~/virtualenv/pip-audit
-  - ~/virtualenv/pip-audit/bin/activate
+  - . ~/virtualenv/pip-audit/bin/activate
   - pip-audit -r requirements.txt
   - deactivate 
