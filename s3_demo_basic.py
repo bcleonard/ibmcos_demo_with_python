@@ -36,7 +36,7 @@ def parse_args(args):
 def list_buckets(clientS3):
     try:
         response = clientS3.list_buckets()  # noqa
-        print('Existing buckets:')
+        print('List of existing buckets:')
         for bucket in response['Buckets']:
             print(f'  {bucket["Name"]}')
         return "success"
@@ -87,7 +87,7 @@ def delete_bucket(clientS3, bucket: str):
             for obj in objects['Contents']:
                 print(' deleting object: ', obj['Key'])
                 delete_file(clientS3, bucket, obj['Key'])
-
+        print('Deleting bucket: ', bucket)
         response = clientS3.delete_bucket(Bucket=bucket)  # noqa
         return response
     except ClientError as e:
@@ -136,11 +136,8 @@ def main():
     list_buckets(clientS3)
 
     # create bucket
+    print("Creating bucket:     ", bucket)
     create_bucket(clientS3, bucket)
-
-    # wait for bucket to be created
-    print('sleep 60 seconds, waiting for bucket to be created')
-    time.sleep(60)
 
     # Retrieve the list of existing buckets
     list_buckets(clientS3)
@@ -149,6 +146,7 @@ def main():
     list_bucket_contents(clientS3, bucket)
 
     # upload files
+    print("Uploading file to bucket:     ", bucket)
     with open('/usr/bin/dockerd', 'rb') as data:
         clientS3.upload_fileobj(data, bucket, 'dockerd')
 
