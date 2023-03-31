@@ -54,6 +54,6 @@ production-job1:
   stage: production
   script:
   - echo "running production push to github:"
-  - git push origin github
+  - git push https://$GITHUB_USER@$GITHUB_TOKEN/$GITHUB_REPO
   when: manual
 
