@@ -54,6 +54,6 @@ production-job1:
   stage: production
   script:
   - echo "running production push to github:"
-  - sleep 30
+  - git push origin github
   when: manual
 
