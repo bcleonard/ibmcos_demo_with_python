@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+
 import argparse
 import configparser
 import os
@@ -13,11 +14,6 @@ from botocore.exceptions import ClientError
 # source inspiration of script
 # https://dev.to/nelsoncode/aws-s3-with-python-3bnn
 #
-
-#
-# global variables
-#
-CONFIG_FILE = "demo_config.txt"
 
 
 # parse cli
@@ -113,6 +109,8 @@ def main():
     #
     argument = parse_args(sys.argv[1:])
 
+    CONFIG_FILE = "demo_config.txt"
+
     if (argument.config):
         CONFIG_FILE = format(argument.config)
         print("\nUsing alternate configuration file: ", CONFIG_FILE)
@@ -127,6 +125,11 @@ def main():
     accesser = config['s3_demo_basic']['accesser_url']
     bucket = config['s3_demo_basic']['bucket']
     filename = config['s3_demo_basic']['file']
+
+    if "Access Key ID" in access_key:
+        print("\nERROR:  It looks like your", CONFIG_FILE, "has not "
+              "been setup correctly.  Please fix and try again.\n")
+        exit(1)
 
     print("\ns3_demo_basic Configuration:")
     print("         Access Key: ", access_key)
@@ -147,9 +150,9 @@ def main():
                       endpoint_url=accesser)
 
     print("\nThere are three (3) parts to the demo.\n")
-    print("\nPART 1:  This part of the demo will create a bucket.")
-    print("It will list existing buckets, create the bucket, and list "
-          "the existing buckets again.\n")
+    print("PART 1:  This part of the demo will create a bucket.")
+    print("PART 1:  It will list existing buckets, create the bucket,")
+    print("PART 1:  and list the existing buckets again.\n")
 
     # retrieve the list of existing buckets
     list_buckets(clientS3)
@@ -157,7 +160,7 @@ def main():
     # create bucket
     print("Creating bucket:     ", bucket)
     create_bucket(clientS3, bucket)
-    time.sleep(1)
+    time.sleep(15)
     print("")
 
     # Retrieve the list of existing buckets
@@ -170,10 +173,10 @@ def main():
               "existence of the bucket.\n")
         time.sleep(60)
 
-    print("\nPART 2:  This part of the demo will upload a file to the newly "
-          "created bucket.")
-    print("It will list the contents of the bucket, upload an object, and "
-          "then list the contents of the bucket again.\n")
+    print("\nPART 2:  This part of the demo will upload a file to the newly")
+    print("PART 2:  created bucket.  It will list the contents of the bucket,")
+    print("PART 2:  upload an object, and then list the contents of the")
+    print("PART 2:  bucket again.\n")
 
     # list contents of bucket
     list_bucket_contents(clientS3, bucket)
@@ -195,18 +198,22 @@ def main():
         time.sleep(60)
 
     print("\nPART 3:  This part of the demo will delete a bucket.")
-    print("It will list existing buckets, list the contents of the bucket, "
-          "delete the bucket, and list the existing buckets again.\n")
+    print("PART 3:  It will list existing buckets, list the contents of the")
+    print("PART 3:  bucket, delete the bucket, and list the existing buckets")
+    print("PART 3:  again.\n")
 
     # Retrieve the list of existing buckets
     list_buckets(clientS3)
 
     # delete bucket
     delete_bucket(clientS3, bucket)
+    time.sleep(15)
     print("")
 
     # Retrieve the list of existing buckets
     list_buckets(clientS3)
+
+    print("\nThis ends the demo.\n")
 
 
 # Execute main() function

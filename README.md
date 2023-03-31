@@ -38,7 +38,9 @@ pip3 install -r requirements.txt
 
 ## How to configure:
 
-To configure the demo, you'll need to edit the [demo_config.txt](demo_config.txt).  Each demo will have its own section.  At a minimum, you'll need to replace/update the Access Key, Secret Access Key & Accesser URL.
+To configure the demo, you'll need to edit the [demo_config.txt](demo_config.txt).  Each demo will have its own section.  At a minimum, you'll need to replace/update the Access Key, Secret Access Key & Accesser URL.  Each demo script may have additional fields that are neccessry to be filled out.
+
+Please note that your define user will need to have the "Vault Provisioner" role and you will need to enable the "Provisioning API Configuration" with the ability for users to "Create and Delete".
 
 ## How to Use:
 
@@ -50,7 +52,7 @@ source virtualenv\bin\activate
 
 Run your demos:
 ```
-python3 <demo script>
+<demo script>
 ```
 
 When you're done, deactivate your virtual environment:
@@ -73,4 +75,3 @@ Other resources for administrating IBM COS:
 
 Other IBM COS resources:
 * [Infrastructure-as-code for IBM COS Trial VMs](https://github.com/hseipp/ibm-cos-vm-iac) (demonstrate virtual variant of the IBM Cloud Object Storage solution)
-
