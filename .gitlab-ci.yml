@@ -60,6 +60,6 @@ production-job1:
   - cat .git/config
   - echo "git remote remove github"
   - echo "git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_REPO.git"
-  - echo "git push github HEAD:master --force"
+  - git push github HEAD:master --force
   when: manual
 
