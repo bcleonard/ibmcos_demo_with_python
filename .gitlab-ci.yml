@@ -57,6 +57,6 @@ production-job1:
   - echo $PWD
   - git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_REPO.git
   - cat .git/config
-  - git push origin github
+  - git push github
   when: manual
 
