@@ -17,15 +17,13 @@ syntax-check:
   stage: build
   script:
   - echo "running syntax check:"
-  - echo $PWD
   - flake8 --statistics
 
 security-link-check:
   stage: build
   script:
-  - echo "running security lint tech::"
-  - echo $PWD
-  - bandit -r .
+  - echo "running security lint check:"
+  - bandit -x ./virtualenv -r .
 
 test-job1:
   stage: test
